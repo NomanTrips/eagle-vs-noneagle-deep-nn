@@ -13,15 +13,15 @@ import glob
 
 shuffle_data = True  # shuffle the addresses
 
-hdf5_path = 'C:\\Users\\19sco\\OneDrive\\Desktop\\eagle-vs-non-eagle-deep-nn\\datasets\\eagles_noneagles_.hdf5'  # file path for the created .hdf5 file
+hdf5_path = 'C:\\Users\\Brian\\Desktop\\eagle-vs-noneagle-deep-nn\\datasets\\eagles_noneagles.hdf5'  # file path for the created .hdf5 file
 
-eagle_train_path = 'C:\\Users\\19sco\\OneDrive\\Desktop\\eagle-vs-non-eagle-deep-nn\\raw-data\\*.jpg' # the original data path
+eagle_train_path = 'C:\\Users\\Brian\\Desktop\\eagle-vs-noneagle-deep-nn\\raw-data\\*.jpg' # the original data path
 
 # get all the image paths 
 addrs = glob.glob(eagle_train_path)
 
 # label the data as 0= non eagle, 1= eagle
-labels = [0 if 'noneagle' in addr else 1 for addr in addrs] 
+labels = [0 if 'non-eagle' in addr else 1 for addr in addrs] 
 
 # shuffle data
 if shuffle_data:
@@ -53,7 +53,7 @@ f = h5py.File(hdf5_path, mode='w')
 # PIL.Image: the pixels range is 0-255,dtype is uint.
 # matplotlib: the pixels range is 0-1,dtype is float.
 f.create_dataset("train_img", train_shape, np.uint8)
-f.create_dataset("test_img", test_shape, np.uint8)  
+f.create_dataset("test_img", test_shape, np.uint8)
 
 # the ".create_dataset" object is like a dictionary, the "train_labels" is the key. 
 f.create_dataset("train_labels", (len(train_addrs),), np.uint8)
@@ -62,9 +62,9 @@ f["train_labels"][...] = train_labels
 f.create_dataset("test_labels", (len(test_addrs),), np.uint8)
 f["test_labels"][...] = test_labels
 
-#f.create_dataset("classes", (2,), np.ubyte)
-#f["classes"][...] = classes
-#f.group.attrs
+dt = h5py.special_dtype(vlen=str)
+class_arr = np.array(["non-eagle", "eagle"], dtype=dt)
+f.create_dataset("list_classes", data=class_arr)
 
 ######################## third part: write the images #########################
 import cv2

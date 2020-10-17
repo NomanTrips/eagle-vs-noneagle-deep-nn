@@ -99,24 +99,21 @@ def load_data():
     
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
-"""
-def load_data():
-    dataset = h5py.File('datasets/eagles_noneagles_.hdf5', "r")
+def load_data_onefile():
+    dataset = h5py.File('datasets/eagles_noneagles.hdf5', "r")
     train_set_x_orig = np.array(dataset["train_img"][:]) # your train set features
     train_set_y_orig = np.array(dataset["train_labels"][:]) # your train set labels
 
-    #test_dataset = h5py.File('datasets/test_catvnoncat.h5', "r")
     test_set_x_orig = np.array(dataset["test_img"][:]) # your test set features
     test_set_y_orig = np.array(dataset["test_labels"][:]) # your test set labels
 
-    #classes = np.array(dataset["list_classes"][:]) # the list of classes
+    classes = np.array(dataset["list_classes"][:]) # the list of classes
     
     train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0]))
     test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
     
-    return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig
+    return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
-"""
 
 def initialize_parameters(n_x, n_h, n_y):
     """
@@ -471,7 +468,7 @@ def print_mislabeled_images(classes, X, y, p):
         index = mislabeled_indices[1][i]
         
         plt.subplot(2, num_images, i + 1)
-        plt.imshow(X[:,index].reshape(64,64,3), interpolation='nearest')
+        plt.imshow(X[:,index].reshape(128,128,3), interpolation='nearest')
         plt.axis('off')
-        plt.title("Prediction: " + classes[int(p[0,index])].decode("utf-8") + " \n Class: " + classes[y[0,index]].decode("utf-8"))
+        plt.title("Prediction: " + classes[int(p[0,index])] + " \n Class: " + classes[y[0,index]])
         plt.show()  

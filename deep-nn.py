@@ -13,12 +13,14 @@ plt.rcParams['image.cmap'] = 'gray'
 
 np.random.seed(1)
 
-train_x_orig, train_y, test_x_orig, test_y, classes = load_data()
+train_x_orig, train_y, test_x_orig, test_y, classes = load_data_onefile()
 
 # Example of a picture
-index = 70
+index = 200
+#print(train_y[0,index])
 plt.imshow(train_x_orig[index])
-print ("y = " + str(train_y[0,index]) + ". It's a " + str(train_y[0,index]) +  " picture.")
+#print ("y = " + str(train_y[0,index]) + ". It's a " + str(train_y[0,index]) +  " picture.")
+print ("y = " + str(train_y[0,index]) + ". It's a " + classes[train_y[0,index]] +  " picture.")
 plt.show()
 
 # Explore your dataset 
@@ -147,10 +149,10 @@ def two_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 
 #predictions_test = predict(test_x, test_y, parameters)
 
 ### CONSTANTS ###
-layers_dims = [12288, 20, 7, 5, 1] #  4-layer model
+layers_dims = [49152, 20, 7, 5, 1] #  4-layer model
 
 # GRADED FUNCTION: L_layer_model
-def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 3000, print_cost=False):#lr was 0.009
+def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 1000, print_cost=False):#lr was 0.009
     """
     Implements a L-layer neural network: [LINEAR->RELU]*(L-1)->LINEAR->SIGMOID.
     
