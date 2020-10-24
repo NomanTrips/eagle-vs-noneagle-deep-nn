@@ -13,15 +13,15 @@ import glob
 
 shuffle_data = True  # shuffle the addresses
 
-hdf5_path = 'C:\\Users\\Brian\\Desktop\\eagle-vs-noneagle-deep-nn\\datasets\\eagles_noneagles.hdf5'  # file path for the created .hdf5 file
+hdf5_path = 'C:\\Users\\Brian\\Desktop\\eagle-vs-noneagle-deep-nn\\datasets\\hawk-vs-nonhawk.hdf5'  # file path for the created .hdf5 file
 
-eagle_train_path = 'C:\\Users\\Brian\\Desktop\\eagle-vs-noneagle-deep-nn\\raw-data\\*.jpg' # the original data path
+eagle_train_path = 'C:\\Users\\Brian\\Desktop\\hawk-dataset\\*.jpg' # the original data path
 
 # get all the image paths 
 addrs = glob.glob(eagle_train_path)
 
 # label the data as 0= non eagle, 1= eagle
-labels = [0 if 'non-eagle' in addr else 1 for addr in addrs] 
+labels = [0 if 'non-hawk' in addr else 1 for addr in addrs] 
 
 # shuffle data
 if shuffle_data:
@@ -63,7 +63,7 @@ f.create_dataset("test_labels", (len(test_addrs),), np.uint8)
 f["test_labels"][...] = test_labels
 
 dt = h5py.special_dtype(vlen=str)
-class_arr = np.array(["non-eagle", "eagle"], dtype=dt)
+class_arr = np.array(["non-hawk", "hawk"], dtype=dt)
 f.create_dataset("list_classes", data=class_arr)
 
 ######################## third part: write the images #########################

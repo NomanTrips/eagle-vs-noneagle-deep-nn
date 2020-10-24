@@ -100,7 +100,7 @@ def load_data():
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
 def load_data_onefile():
-    dataset = h5py.File('datasets/eagles_noneagles.hdf5', "r")
+    dataset = h5py.File('datasets/hawk-vs-nonhawk.hdf5', "r")
     train_set_x_orig = np.array(dataset["train_img"][:]) # your train set features
     train_set_y_orig = np.array(dataset["train_labels"][:]) # your train set labels
 

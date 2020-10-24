@@ -16,7 +16,7 @@ np.random.seed(1)
 train_x_orig, train_y, test_x_orig, test_y, classes = load_data_onefile()
 
 # Example of a picture
-index = 200
+index = 10
 #print(train_y[0,index])
 plt.imshow(train_x_orig[index])
 #print ("y = " + str(train_y[0,index]) + ". It's a " + str(train_y[0,index]) +  " picture.")
@@ -46,7 +46,7 @@ print ("train_x's shape: " + str(train_x.shape))
 print ("test_x's shape: " + str(test_x.shape))
 
 ### CONSTANTS DEFINING THE MODEL ####
-n_x = 49152     # num_px * num_px * 3
+n_x = 49152     # num_px * num_px * 3 49152 12288
 n_h = 7
 n_y = 1
 layers_dims = (n_x, n_h, n_y)
@@ -148,8 +148,10 @@ def two_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 
 
 #predictions_test = predict(test_x, test_y, parameters)
 
+#print_mislabeled_images(classes, test_x, test_y, predictions_test)
+
 ### CONSTANTS ###
-layers_dims = [49152, 20, 7, 5, 1] #  4-layer model
+layers_dims = [49152, 20, 7, 5, 1] #  4-layer model 49152 12288
 
 # GRADED FUNCTION: L_layer_model
 def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 1000, print_cost=False):#lr was 0.009
